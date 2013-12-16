@@ -8,6 +8,7 @@ gem 'rails', '4.0.0'
 gem 'sorcery'
 gem "active_model_serializers"
 gem "paperclip", "~> 3.0"
+gem 'versionist'
 
 group :development, :test do
   gem 'sqlite3'
