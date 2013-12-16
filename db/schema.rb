@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131215214612) do
+ActiveRecord::Schema.define(version: 20131216044338) do
 
   create_table "asignar_tags", force: true do |t|
     t.integer  "noticia_id"
@@ -35,6 +35,12 @@ ActiveRecord::Schema.define(version: 20131215214612) do
     t.datetime "updated_at"
   end
 
+  create_table "roles", force: true do |t|
+    t.string   "nombre"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "tags", force: true do |t|
     t.string   "Nombre"
     t.datetime "created_at"
@@ -50,6 +56,7 @@ ActiveRecord::Schema.define(version: 20131215214612) do
     t.datetime "updated_at"
     t.string   "remember_me_token"
     t.datetime "remember_me_token_expires_at"
+    t.integer  "role_id"
   end
 
   add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token"

@@ -6,6 +6,11 @@ module Api
 			def index
 				respond_with Noticia.all
 			end
+
+			private
+				def noticia_params
+					params.require( :noticia ).permit( :Titulo, :Noticia, :user_token )
+				end
 		end
 	end
 end
