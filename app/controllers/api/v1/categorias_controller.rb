@@ -9,7 +9,7 @@ module Api
 			end
 
 			def show
-				@noticias = Noticia.find_by_categoria( params[:categoria] )
+				@noticias = Noticia.where( categoria: params[:categoria] )
 				respond_with @noticias
 			end
 		end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131216044338) do
+ActiveRecord::Schema.define(version: 20131217083830) do
 
   create_table "asignar_tags", force: true do |t|
     t.integer  "noticia_id"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 20131216044338) do
     t.integer  "categoria_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "ciudad"
+    t.string   "delegacion"
   end
 
   create_table "roles", force: true do |t|
