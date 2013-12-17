@@ -1,3 +1,3 @@
 class NoticiaSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :titulo
 end

@@ -1,10 +1,14 @@
 NewsT::Application.routes.draw do
 
+  get 'login' => 'sessions#new', as: :login
+
   resources :users
+  resources :sessions
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :noticias
+      resources :categorias
     end
   end
   

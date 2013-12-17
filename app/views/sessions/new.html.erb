@@ -1,0 +1,17 @@
+<div class="col-md-6 col-md-push-3 col-ms-10 col-xs-12">
+  <%= form_tag sessions_path do %>
+    <div>
+      <%= text_field_tag :username, params[:username], class: "form-control", placeholder: "Usuario" %>
+    </div>
+    <div>
+      <%= password_field_tag :password, nil, class: "form-control", placeholder: "Contraseña" %>
+    </div>
+    <br>
+    <h4><div class="field">
+      <%= check_box_tag :remember_me %><label for="remember_me" class="label label-info">No cerrar sesion</label>
+    </div></h4>
+    <br><br>
+
+    <div class="actions"><%= submit_tag "Entrar", class: "btn btn-info" %></div>
+  <% end %>
+</div>

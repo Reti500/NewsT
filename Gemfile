@@ -4,7 +4,7 @@ ruby '1.9.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
-
+gem 'json', '1.8.0'
 gem 'sorcery'
 gem "active_model_serializers"
 gem "paperclip", "~> 3.0"
