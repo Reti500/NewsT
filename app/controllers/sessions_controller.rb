@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   	user = login( params[:username], params[:password], params[:remember_me] )
 
   	if user
-  		redirect_back_or_to root_url
+  		redirect_back_or_to users_path
   	else
   		render :new
   	end
