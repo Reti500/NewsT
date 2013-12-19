@@ -9,7 +9,9 @@ gem 'sorcery'
 gem "active_model_serializers"
 gem "paperclip", "~> 3.0"
 gem 'versionist'
-gem 'aws-sdk'
+#gem "aws-sdk", "~> 1.30.1"
+#gem "nokogiri", "~> 1.6.1"
+#gem 'tiny_tds', '0.5.1'
 
 group :development, :test do
   gem 'sqlite3'
