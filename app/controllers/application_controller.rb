@@ -6,4 +6,12 @@ class ApplicationController < ActionController::Base
   def getKeyApp
   	return "36403e55692f756f5c2f5b5263654f5b7a2034614b2a67317d5b48283b"
   end
+
+  def checkKeyApp( key_app )
+		if key_app == getKeyApp 
+			true
+		else 
+			false
+		end
+	end
 end

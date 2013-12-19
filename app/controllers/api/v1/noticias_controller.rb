@@ -5,39 +5,41 @@ module Api
 			skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
 
 			before_action :get_noticia, only: [:show, :edit, :update, :destroy]
-
+			#before_action :get_user, only: [:create, :update]
 			respond_to :json
 
 			def index
-				respond_with Noticia.all.order( "updated_at < ?", 1.week.ago ).limit(10)
+				@limite = params[:limit].to_i or 10
+
+				respond_with Noticia.all.order( "updated_at DESC" ).limit( @limite )
 			end
 
 			def show
 				respond_with @noticia
 			end
 
-			def new
-				
-			end
-
 			def create
-				if @user = User.find( params[:user_id] )
-					@noticia = Noticia.new( noticia_params )
-					if @noticia.save
-						respond_with @noticia
-					else
-						respond_with "Error"
-					end
+				@params = noticia_params
+
+				if checkKeyApp( params[:key_app] )
+					#@params[:user_id] = @user.id
+					@params[:rating] = 0
+					@params[:happy] = 0
+					@params[:bad] = 0
+
+					@noticia = Noticia.new( params[:noticia] )
+					respond_with @noticia.save
+				else
+					respond_with :error => "Ninguna referencia"
 				end
 			end
 
-			def edit
-				
-			end
-
 			def update
-				@noticia.update( noticia_params )
-				respond_with @noticia
+				if @user and checkKeyApp( params[:key_app])
+					respond_with @noticia.update( noticia_params )
+				else
+					respond_with :error => "Datos invalidos"
+				end
 			end
 
 			def destroy
@@ -46,11 +48,15 @@ module Api
 
 			private
 				def noticia_params
-					params.require( :noticia ).permit( :titulo, :noticia, :user_id, :imagen )
+					params.require( :noticia ).permit( :titulo, :noticia, :imagen )
 				end
 
 				def get_noticia
 					@noticia = Noticia.find( params[:id] )
+				end
+
+				def get_user
+					@user = User.find_by( id: params[:id], key: params[:key_user] )
 				end
 		end
 	end

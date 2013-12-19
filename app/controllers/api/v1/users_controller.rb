@@ -7,12 +7,8 @@ module Api
 
 			before_action :get_user, only: [:show, :update]
 
-			# def index
-			# 	respond_with User.all
-			# end
-
 			def show
-				if @user and checkKeyApp
+				if @user and checkKeyApp( params[:key_app] )
 					respond_with @user
 				else
 					respond_with :errors => "Nada por hacer"
@@ -20,8 +16,7 @@ module Api
 			end
 
 			def create
-				
-				if checkKeyApp
+				if checkKeyApp( params[:key_app] )
 
 					@params = user_params
 
@@ -29,19 +24,15 @@ module Api
 					@params[:key] = SecureRandom.hex
 					@user = User.new( @params )
 
-					@user.save
-
-					respond_with @user
+					respond_with @user.save
 				else
 					respond_with :errors => "Algo salio mal"
 				end
 			end
 
 			def update
-				if @user and checkKeyApp
-					#@user = User.update( user_params )
-					@user.update( user_params )
-					respond_with @user
+				if @user and checkKeyApp( params[:key_app] )
+					respond_with @user.update( user_params )
 				else
 					respond_with :errors => "Algo salio mal"
 				end
@@ -54,10 +45,6 @@ module Api
 
 				def get_user
 					@user = User.find_by( id: params[:id], key: params[:key_user] )
-				end
-
-				def checkKeyApp
-					return true if params[:key_app] == getKeyApp else false
 				end
 		end
 	end
