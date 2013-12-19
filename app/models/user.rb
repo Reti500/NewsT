@@ -4,4 +4,8 @@ class User < ActiveRecord::Base
   has_many :noticias
 
   belongs_to :role
+
+  validates_presence_of :username, :email, :password, :password_confirmation
+  validates_uniqueness_of :username, :email
+  validates_confirmation_of :password
 end

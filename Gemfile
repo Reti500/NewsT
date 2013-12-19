@@ -8,7 +8,9 @@ gem 'json', '1.8.0'
 gem 'sorcery'
 gem "active_model_serializers"
 gem "paperclip", "~> 3.0"
+gem "paperclip-dropbox", ">= 1.1.7"
 gem 'versionist'
+# gem 'fog'
 #gem "aws-sdk", "~> 1.30.1"
 #gem "nokogiri", "~> 1.6.1"
 #gem 'tiny_tds', '0.5.1'

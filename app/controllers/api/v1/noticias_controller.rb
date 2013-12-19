@@ -46,7 +46,7 @@ module Api
 
 			private
 				def noticia_params
-					params.require( :noticia ).permit( :titulo, :noticia, :user_id )
+					params.require( :noticia ).permit( :titulo, :noticia, :user_id, :imagen )
 				end
 
 				def get_noticia

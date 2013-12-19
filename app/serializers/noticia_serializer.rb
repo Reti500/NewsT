@@ -1,9 +1,9 @@
 class NoticiaSerializer < ActiveModel::Serializer
-  attributes :id, :titulo, :noticia, :rating, :happy, :bad, :imagen, :created_at
+  attributes :id, :titulo, :noticia, :rating, :happy, :bad, :photo, :created_at
 
-  def imagen
+  def photo
   	if object.imagen.exists?
-  		imagen
+  		"object.imagen"
   	else
   		"nil"
   	end
