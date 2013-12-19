@@ -9,11 +9,7 @@ module Api
 			respond_to :json
 
 			def index
-				if params[:dateAGo]
-					respond_with Noticia.all.order( "updated_at < ?", 1.week.ago )
-				else
-					respond_with Noticia.all
-				end
+				respond_with Noticia.all.order( "updated_at < ?", 1.week.ago ).limit(10)
 			end
 
 			def show

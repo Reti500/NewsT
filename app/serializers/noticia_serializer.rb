@@ -1,9 +1,9 @@
 class NoticiaSerializer < ActiveModel::Serializer
-  attributes :titulo, :noticia, :user
+  attributes :id, :titulo, :noticia, :rating, :happy, :bad, :imagen, :created_at
 
-  def user
-  	if object.user
-  		"#{object.user.username}"
+  def imagen
+  	if object.imagen.exists?
+  		imagen
   	else
   		"nil"
   	end
