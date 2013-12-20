@@ -11,7 +11,7 @@ module Api
 			def index
 				@limite = params[:limit].to_i or 10
 
-				respond_with Noticia.all.order( "updated_at DESC" ).limit( @limite )
+				respond_with Noticia.all.order( "updated_at DESC" ).limit( 10 )
 			end
 
 			def show
@@ -19,15 +19,15 @@ module Api
 			end
 
 			def create
-				@params = noticia_params
+				#@params = noticia_params
 
 				if checkKeyApp( params[:key_app] )
 					#@params[:user_id] = @user.id
-					@params[:rating] = 0
-					@params[:happy] = 0
-					@params[:bad] = 0
+					# @params[:rating] = 0
+					# @params[:happy] = 0
+					# @params[:bad] = 0
 
-					@noticia = Noticia.new( params[:noticia] )
+					@noticia = Noticia.new( noticia_params )
 					respond_with @noticia.save
 				else
 					respond_with :error => "Ninguna referencia"
