@@ -11,4 +11,7 @@ class Noticia < ActiveRecord::Base
 	    :dropbox_options => {
 	    	:path => proc { |style| "Noticias/#{id}/#{style}/#{imagen.original_filename}" }
 	    }
+
+	validates_presence_of :titulo, :noticia, :user_id
+	validates_uniqueness_of :titulo
 end

@@ -9,3 +9,5 @@
 Role.create( nombre: "root" )
 Role.create( nombre: "admin" )
 Role.create( nombre: "user" )
+
+Categoria.create( nombre: "Normal" )

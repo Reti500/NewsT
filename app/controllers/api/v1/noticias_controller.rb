@@ -5,7 +5,7 @@ module Api
 			skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
 
 			before_action :get_noticia, only: [:show, :edit, :update, :destroy]
-			#before_action :get_user, only: [:create, :update]
+			before_action :get_user, only: [:create, :update]
 			respond_to :json
 
 			def index
@@ -19,18 +19,25 @@ module Api
 			end
 
 			def create
-				#@params = noticia_params
+				@params = noticia_params
 
-				if checkKeyApp( params[:key_app] )
-					#@params[:user_id] = @user.id
-					# @params[:rating] = 0
-					# @params[:happy] = 0
-					# @params[:bad] = 0
+				if checkKeyApp( params[:key_app] ) and @user
+					cat = params[:categoria] or "Normal"
+					@params[:categoria_id] = Categoria.find_by( nombre: cat ).id or nil
+					@params[:user_id] = @user.id
+					@params[:rating] = 0
+					@params[:happy] = 0
+					@params[:bad] = 0
 
-					@noticia = Noticia.new( noticia_params )
-					respond_with @noticia.save
+					@noticia = Noticia.new( @params )
+					@noticia.save
+					respond_to do |format| 
+						format.json { render :json => @noticia }
+					end
 				else
-					respond_with :error => "Ninguna referencia"
+					respond_to do |format| 
+						format.json { render :json => "Error fatal" }
+					end
 				end
 			end
 
