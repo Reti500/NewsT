@@ -20,6 +20,7 @@ module Api
 
 			def create
 				@params = noticia_params
+				@tags = []
 
 				if checkKeyApp( params[:key_app] ) and @user
 					cat = params[:categoria] or "Normal"
@@ -30,9 +31,22 @@ module Api
 					@params[:bad] = 0
 
 					@noticia = Noticia.new( @params )
-					@noticia.save
-					respond_to do |format| 
-						format.json { render :json => @noticia }
+					if @noticia.save
+						getTags( @params[:noticia].split( ' ' ), @tags )
+						if @tags
+							@tags.each do |t|
+								newTag = Tag.find_or_create_by( nombre: t )
+								@noticia.tags << newTag
+							end
+						end
+
+						respond_to do |format| 
+							format.json { render :json => @noticia }
+						end
+					else
+						respond_to do |format|
+							format.json { render :json => @noticia.errors }
+						end
 					end
 				else
 					respond_to do |format| 

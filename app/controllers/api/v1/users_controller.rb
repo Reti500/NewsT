@@ -22,9 +22,17 @@ module Api
 
 					@params[:role_id] = Role.find_by( nombre: "user" ).id
 					@params[:key] = SecureRandom.hex
+
 					@user = User.new( @params )
 
-					respond_with @user.save
+					if @user.save
+						respond_with @user
+					else
+						respond_to do |format|
+							format.json { render :json => @user.errros }
+						end
+					end
+
 				else
 					respond_with :errors => "Algo salio mal"
 				end

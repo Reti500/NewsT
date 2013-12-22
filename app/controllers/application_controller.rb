@@ -14,4 +14,15 @@ class ApplicationController < ActionController::Base
 			false
 		end
 	end
+
+  def getTags( palabras, tags )
+    palabras.each do |p|
+      if p.include? "#"
+        minitag = p.split( /#(\S+)/ ).last
+        unless minitag.include? "#"
+          tags << minitag
+        end
+      end
+    end
+  end
 end

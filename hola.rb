@@ -21,5 +21,5 @@ def getTags( palabras, tags )
 	end
 end
 
-getTag( @str, @tag )
+getTags( @str, @tag )
 @tag
