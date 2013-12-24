@@ -40,8 +40,6 @@ ActiveRecord::Schema.define(version: 20131219102448) do
     t.integer  "imagen_file_size"
     t.datetime "imagen_updated_at"
     t.integer  "rating"
-    t.integer  "happy"
-    t.integer  "bad"
   end
 
   create_table "roles", force: true do |t|

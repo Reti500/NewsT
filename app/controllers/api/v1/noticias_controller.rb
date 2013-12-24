@@ -27,8 +27,6 @@ module Api
 					@params[:categoria_id] = Categoria.find_by( nombre: cat ).id or nil
 					@params[:user_id] = @user.id
 					@params[:rating] = 0
-					@params[:happy] = 0
-					@params[:bad] = 0
 
 					@noticia = Noticia.new( @params )
 					if @noticia.save
